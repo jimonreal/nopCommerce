@@ -1,0 +1,190 @@
+@using Nop.Services.Localization
+@using Nop.Core
+@inject ILocalizationService localizationService
+@inject IStoreContext storeContext
+
+@{
+    Layout = "_ColumnsOne";
+
+    var homepageTitle = await localizationService.GetLocalizedAsync(await storeContext.GetCurrentStoreAsync(), s => s.HomepageTitle);
+
+    if (!string.IsNullOrEmpty(homepageTitle))
+    {
+        NopHtml.AddTitleParts(homepageTitle);
+    }
+
+    var homepageDescription = await localizationService.GetLocalizedAsync(await storeContext.GetCurrentStoreAsync(), s => s.HomepageDescription);
+
+    if (!string.IsNullOrEmpty(homepageDescription))
+    {
+        NopHtml.AddMetaDescriptionParts(homepageDescription);
+    }
+
+    NopHtml.AppendPageCssClassParts("html-home-page");
+    NopHtml.AppendCssFileParts("~/lib_npm/swiper/swiper-bundle.min.css");
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/swiper/swiper-bundle.min.js");
+}
+<div class="page home-page">
+    <div class="page-body">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageTop })
+
+        @*
+            ============================================================
+            HERO CAROUSEL — Latest Hike Photos
+            Replace the placeholder images below with your actual hike
+            photos. Images are served from /images/uploaded/ or wherever
+            you host them. Ideal size: 1400×600px.
+            ============================================================
+        *@
+        <section class="hci-hero-carousel">
+            <div class="swiper hci-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide hci-slide">
+                        <div class="hci-slide-overlay"></div>
+                        <div class="hci-slide-placeholder" style="background: linear-gradient(135deg, #1B6B7D 0%, #145A6A 50%, #3C9B4A 100%);">
+                            <div class="hci-slide-content">
+                                <h2>Wicklow Mountains Traverse</h2>
+                                <p>January 2026 — Our group conquering the ridge walk in winter conditions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide hci-slide">
+                        <div class="hci-slide-overlay"></div>
+                        <div class="hci-slide-placeholder" style="background: linear-gradient(135deg, #E8922A 0%, #D07E1F 50%, #1B6B7D 100%);">
+                            <div class="hci-slide-content">
+                                <h2>Carrauntoohil Summit</h2>
+                                <p>December 2025 — Ireland's highest peak at sunrise</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide hci-slide">
+                        <div class="hci-slide-overlay"></div>
+                        <div class="hci-slide-placeholder" style="background: linear-gradient(135deg, #3C9B4A 0%, #2E7E3A 50%, #1B6B7D 100%);">
+                            <div class="hci-slide-content">
+                                <h2>Connemara Coastal Walk</h2>
+                                <p>November 2025 — Atlantic coastline and wild beauty</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide hci-slide">
+                        <div class="hci-slide-overlay"></div>
+                        <div class="hci-slide-placeholder" style="background: linear-gradient(135deg, #2C3E50 0%, #1B6B7D 50%, #E8922A 100%);">
+                            <div class="hci-slide-content">
+                                <h2>Glendalough Loop</h2>
+                                <p>October 2025 — Autumn colours in the valley of two lakes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination hci-pagination"></div>
+                <div class="swiper-button-prev hci-nav"></div>
+                <div class="swiper-button-next hci-nav"></div>
+            </div>
+        </section>
+
+        @*
+            ============================================================
+            OUR STORY — About Hiking Club Ireland
+            You can also edit this content via Admin > Content Management
+            > Topics > "HomepageText" for dynamic CMS control.
+            ============================================================
+        *@
+        <section class="hci-story">
+            <div class="hci-story-inner">
+                <div class="hci-story-badge">
+                    <img src="~/images/thumbs/0000135_Badge-HCI-2.png" alt="Hiking Club Ireland Badge" />
+                </div>
+                <div class="hci-story-text">
+                    <h2>Welcome to Hiking Club Ireland</h2>
+                    <p class="hci-story-lead">
+                        Since our founding, Hiking Club Ireland has been bringing together walkers, hikers, and
+                        outdoor enthusiasts from every corner of the country. Whether you're a seasoned mountaineer
+                        or taking your first steps on a trail, there's a place for you here.
+                    </p>
+                    <p>
+                        Every week we organise hikes across Ireland's most spectacular landscapes — from the
+                        rugged Atlantic coastline to the serene lakeland trails of the midlands, from Wicklow's
+                        granite ridges to Kerry's soaring peaks. Our experienced leaders guide groups of all
+                        fitness levels through routes that showcase the very best of Ireland's natural heritage.
+                    </p>
+                    <p>
+                        Hiking Club Ireland is more than just walking — it's about community, shared adventure,
+                        and the friendships forged on the trail. Join us and discover Ireland one step at a time.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        @* Highlights / Value Proposition *@
+        <section class="hci-highlights">
+            <h2 class="hci-highlights-title">Why Hike With Us</h2>
+            <div class="hci-highlights-grid">
+                <div class="hci-highlight-card">
+                    <div class="hci-highlight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                    </div>
+                    <h3>Weekly Hikes</h3>
+                    <p>Guided group hikes every weekend across Ireland's finest trails, for all ability levels.</p>
+                </div>
+                <div class="hci-highlight-card">
+                    <div class="hci-highlight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Great Community</h3>
+                    <p>A friendly, welcoming group of outdoor enthusiasts who share a love for Ireland's landscapes.</p>
+                </div>
+                <div class="hci-highlight-card">
+                    <div class="hci-highlight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3>All Over Ireland</h3>
+                    <p>From Donegal to Kerry, Connemara to Wicklow — we explore every mountain range and coastal path.</p>
+                </div>
+                <div class="hci-highlight-card">
+                    <div class="hci-highlight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+                    </div>
+                    <h3>All Levels Welcome</h3>
+                    <p>Beginner-friendly walks, moderate trails, and challenging summit climbs — pick your pace.</p>
+                </div>
+            </div>
+        </section>
+
+        @* Dynamic CMS topic block — editable via Admin *@
+        @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "HomepageText" })
+
+        @* Keep widget zones and categories for flexibility *@
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeCategories })
+        @await Component.InvokeAsync(typeof(HomepageCategoriesViewComponent))
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeProducts })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeBestSellers })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBottom })
+    </div>
+</div>
+
+<script asp-location="Footer">
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper('.hci-swiper', {
+                autoHeight: false,
+                grabCursor: true,
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.hci-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next.hci-nav',
+                    prevEl: '.swiper-button-prev.hci-nav',
+                },
+            });
+        }
+    });
+</script>
