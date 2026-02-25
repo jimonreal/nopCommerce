@@ -958,7 +958,7 @@ label, label + * {
 
 .header-links-wrapper {
   position: relative;
-  padding: 20px 0;
+  padding: 12px 0;
 }
 
 .header-links {
@@ -1007,12 +1007,12 @@ label, label + * {
 .header-lower {
   position: relative;
   z-index: 0;
-  padding: 35px 0;
+  padding: 15px 0;
   background-color: #fff;
 }
 
 .header-logo {
-  margin: 0 0 20px;
+  margin: 0 0 8px;
   text-align: center;
 }
 
@@ -1027,7 +1027,10 @@ label, label + * {
   opacity: 1;
 }
 
-/* Search box */
+/* Search box - hide when disabled (no input rendered) */
+.store-search-box:not(:has(input)) {
+  display: none !important;
+}
 
 .search-box form {
   display: flex;
@@ -1325,7 +1328,7 @@ label, label + * {
   z-index: 1;
   width: 90%;
   max-width: 600px;
-  margin: 0 auto 40px;
+  margin: 0 auto 15px;
 }
 
 .menu {
@@ -5709,6 +5712,7 @@ pre, .overview pre {
     text-align: left;
     vertical-align: middle;
     font-size: 0;
+    margin: 0;
   }
 
   .search-box form {
@@ -5729,7 +5733,7 @@ pre, .overview pre {
     position: relative;
     z-index: 5;
     max-width: 1200px;
-    margin: 0 auto 30px;
+    margin: 0 auto 15px;
     border-top: 2px solid var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
     padding: 0;
@@ -5742,7 +5746,7 @@ pre, .overview pre {
   /** Main menu START **/
 
   .menu-container {
-    padding: 20px;
+    padding: 15px 20px;
     position: relative;
     width: 100%;
   }
