@@ -1,12 +1,32 @@
 .nop-slider {
   --swiper-navigation-color: #fff;
-  --swiper-pagination-color: #fff
+  --swiper-pagination-color: #fff;
 }
 
 .nop-slider .swiper-button-disabled {
   pointer-events: auto;
 }
 
+.nop-slider .swiper-slide {
+  overflow: hidden;
+}
+
+.nop-slider .swiper-slide a {
+  display: block;
+  line-height: 0;
+}
+
 .nop-slider .slider-img {
   max-width: 100%;
+  display: block;
+  vertical-align: middle;
+}
+
+/* Lazy preloader — prevent layout shift / extra block on mobile */
+.nop-slider .swiper-lazy-preloader {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  margin: 0 !important;
 }

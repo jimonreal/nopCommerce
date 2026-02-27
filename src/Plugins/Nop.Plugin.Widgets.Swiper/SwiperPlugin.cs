@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Nop.Core;
 using Nop.Core.Domain.Cms;
 using Nop.Core.Infrastructure;
@@ -86,28 +86,25 @@ public class SwiperPlugin : BasePlugin, IWidgetPlugin
     /// <returns>A task that represents the asynchronous operation</returns>
     public override async Task InstallAsync()
     {
-        //pictures
+        //pictures - only add sample slides if images exist (path may differ when running from bin vs publish)
         var sampleImagesPath = _fileProvider.MapPath("~/Plugins/Widgets.Swiper/Content/sample-images/");
+        var slides = new List<Slide>();
 
-        //settings
-
-        var slides = new List<Slide>
+        foreach (var (fileName, seoName) in new[] { ("banner_01.webp", "banner_1"), ("banner_02.webp", "banner_2") })
         {
-            new()
+            var filePath = _fileProvider.Combine(sampleImagesPath, fileName);
+            var bytes = await _fileProvider.ReadAllBytesAsync(filePath);
+            if (bytes is { Length: > 0 })
             {
-                PictureId = (await _pictureService.InsertPictureAsync(await _fileProvider.ReadAllBytesAsync(_fileProvider.Combine(sampleImagesPath, "banner_01.webp")), MimeTypes.ImageWebp, "banner_1")).Id,
-                TitleText = string.Empty,
-                AltText = "Sample slide name",
-                LinkUrl = _webHelper.GetStoreLocation(),
-            },
-            new()
-            {
-                PictureId = (await _pictureService.InsertPictureAsync(await _fileProvider.ReadAllBytesAsync(_fileProvider.Combine(sampleImagesPath, "banner_02.webp")), MimeTypes.ImageWebp, "banner_2")).Id,
-                TitleText = string.Empty,
-                AltText = "Sample slide name",
-                LinkUrl = _webHelper.GetStoreLocation(),
+                slides.Add(new Slide
+                {
+                    PictureId = (await _pictureService.InsertPictureAsync(bytes, MimeTypes.ImageWebp, seoName)).Id,
+                    TitleText = string.Empty,
+                    AltText = "Sample slide name",
+                    LinkUrl = _webHelper.GetStoreLocation(),
+                });
             }
-        };
+        }
 
         var settings = new SwiperSettings
         {

@@ -1,4 +1,4 @@
-﻿@model PublicInfoModel
+@model PublicInfoModel
 @{
     Layout = "";
 }
@@ -30,7 +30,8 @@
 
 <script asp-location="Footer">
     var swiper6 = new Swiper(".nop-slider", {
-      autoHeight: true,
+        loop: true,
+        autoHeight: false,
         grabCursor: true,
         effect: "fade",
         lazy: true,
