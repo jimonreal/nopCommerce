@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -6,6 +6,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Discounts;
 using Nop.Core.Domain.Forums;
+using ForumPrivateMessage = Nop.Core.Domain.Forums.PrivateMessage;
 using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.Messages;
@@ -129,8 +130,8 @@ public class MySqlDateTimeWithPrecisionMigration : ForwardOnlyMigration
         Alter.Table(NameCompatibilityManager.GetTableName(typeof(ForumPostVote)))
             .AlterColumn(NameCompatibilityManager.GetColumnName(typeof(ForumPostVote), nameof(ForumPostVote.CreatedOnUtc)))
             .AsCustom("datetime(6)");
-        Alter.Table(NameCompatibilityManager.GetTableName(typeof(PrivateMessage)))
-            .AlterColumn(NameCompatibilityManager.GetColumnName(typeof(PrivateMessage), nameof(PrivateMessage.CreatedOnUtc)))
+        Alter.Table(NameCompatibilityManager.GetTableName(typeof(ForumPrivateMessage)))
+            .AlterColumn(NameCompatibilityManager.GetColumnName(typeof(ForumPrivateMessage), nameof(ForumPrivateMessage.CreatedOnUtc)))
             .AsCustom("datetime(6)");
         Alter.Table(NameCompatibilityManager.GetTableName(typeof(ForumSubscription)))
             .AlterColumn(NameCompatibilityManager.GetColumnName(typeof(ForumSubscription), nameof(ForumSubscription.CreatedOnUtc)))

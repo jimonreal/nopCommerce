@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using Nop.Core.Domain.Affiliates;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
@@ -9,6 +9,7 @@ using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Discounts;
 using Nop.Core.Domain.FilterLevels;
 using Nop.Core.Domain.Forums;
+using ForumPrivateMessage = Nop.Core.Domain.Forums.PrivateMessage;
 using Nop.Core.Domain.Gdpr;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Logging;
@@ -136,7 +137,7 @@ public class SchemaMigration : ForwardOnlyMigration
         Create.TableFor<DiscountRequirement>();
         Create.TableFor<DiscountUsageHistory>();
         Create.TableFor<DiscountManufacturerMapping>();
-        Create.TableFor<PrivateMessage>();
+        Create.TableFor<ForumPrivateMessage>();
         Create.TableFor<ForumGroup>();
         Create.TableFor<Forum>();
         Create.TableFor<ForumTopic>();

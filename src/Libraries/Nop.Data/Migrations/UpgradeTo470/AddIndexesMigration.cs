@@ -1,8 +1,9 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Forums;
+using ForumPrivateMessage = Nop.Core.Domain.Forums.PrivateMessage;
 using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.News;
 using Nop.Core.Domain.Orders;
@@ -61,18 +62,18 @@ public class AddIndexesMigration : ForwardOnlyMigration
                 .OnColumn(nameof(ExternalAuthenticationRecord.CustomerId)).Ascending()
                 .WithOptions().NonClustered();
 
-        if (!Schema.Table(NameCompatibilityManager.GetTableName(typeof(PrivateMessage)))
+        if (!Schema.Table(NameCompatibilityManager.GetTableName(typeof(ForumPrivateMessage)))
                 .Index("IX_PrivateMessage_FromCustomerId").Exists())
             IfDatabase(databaseType).Create.Index("IX_PrivateMessage_FromCustomerId")
-                .OnTable(NameCompatibilityManager.GetTableName(typeof(PrivateMessage)))
-                .OnColumn(nameof(PrivateMessage.FromCustomerId)).Ascending()
+                .OnTable(NameCompatibilityManager.GetTableName(typeof(ForumPrivateMessage)))
+                .OnColumn(nameof(ForumPrivateMessage.FromCustomerId)).Ascending()
                 .WithOptions().NonClustered();
 
-        if (!Schema.Table(NameCompatibilityManager.GetTableName(typeof(PrivateMessage)))
+        if (!Schema.Table(NameCompatibilityManager.GetTableName(typeof(ForumPrivateMessage)))
                 .Index("IX_PrivateMessage_ToCustomerId").Exists())
             IfDatabase(databaseType).Create.Index("IX_PrivateMessage_ToCustomerId")
-                .OnTable(NameCompatibilityManager.GetTableName(typeof(PrivateMessage)))
-                .OnColumn(nameof(PrivateMessage.ToCustomerId)).Ascending()
+                .OnTable(NameCompatibilityManager.GetTableName(typeof(ForumPrivateMessage)))
+                .OnColumn(nameof(ForumPrivateMessage.ToCustomerId)).Ascending()
                 .WithOptions().NonClustered();
 
         if (!Schema.Table(NameCompatibilityManager.GetTableName(typeof(ForumSubscription)))

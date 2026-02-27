@@ -1,8 +1,9 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Forums;
+using ForumPrivateMessage = Nop.Core.Domain.Forums.PrivateMessage;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.News;
 using Nop.Core.Domain.Orders;
@@ -44,7 +45,7 @@ public class WorkflowMessageServiceTests : ServiceTest
     private Forum _forum;
     private ForumTopic _forumTopic;
     private ForumPost _forumPost;
-    private PrivateMessage _privateMessage;
+    private ForumPrivateMessage _privateMessage;
     private ProductReview _productReview;
     private GiftCard _giftCard;
     private BlogComment _blogComment;
@@ -89,7 +90,7 @@ public class WorkflowMessageServiceTests : ServiceTest
         _forumPost = new ForumPost { CustomerId = _customer.Id, TopicId = _forumTopic.Id, Text = "Text" };
         await _forumService.InsertPostAsync(_forumPost, false);
 
-        _privateMessage = new PrivateMessage
+        _privateMessage = new ForumPrivateMessage
         {
             FromCustomerId = 1,
             ToCustomerId = 2,

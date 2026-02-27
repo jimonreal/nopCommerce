@@ -1,4 +1,4 @@
-﻿using Nop.Core.Domain.Catalog;
+using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Discounts;
@@ -38,7 +38,7 @@ public partial class BaseNameCompatibility : INameCompatibility
         { typeof(ForumPostVote), "Forums_PostVote" },
         { typeof(ForumSubscription), "Forums_Subscription" },
         { typeof(ForumTopic), "Forums_Topic" },
-        { typeof(PrivateMessage), "Forums_PrivateMessage" },
+        { typeof(Nop.Core.Domain.Forums.PrivateMessage), "Forums_PrivateMessage" },
         { typeof(NewsItem), "News" }
     };
 
