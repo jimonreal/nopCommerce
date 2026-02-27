@@ -1,5 +1,6 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Nop.Core.Events;
+using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Data.Migrations;
 using Nop.Services.Configuration;
@@ -68,6 +69,14 @@ public partial class AppStartedConsumer : IConsumer<AppStartedEvent>
 
         //init theme provider
         await _themeProvider.InitializeAsync();
+
+        //ensure Swiper widget is queued for install if present but not yet installed (e.g. after restore from older DB)
+        var swiperDescriptor = await _pluginService.GetPluginDescriptorBySystemNameAsync<IPlugin>("Widgets.Swiper", LoadPluginsMode.All);
+        if (swiperDescriptor != null && !swiperDescriptor.Installed &&
+            !Singleton<IPluginsInfo>.Instance.PluginNamesToInstall.Any(p => p.SystemName == "Widgets.Swiper"))
+        {
+            await _pluginService.PreparePluginToInstallAsync("Widgets.Swiper", checkDependencies: false);
+        }
 
         //install and update plugins
         await _pluginService.InstallPluginsAsync();
