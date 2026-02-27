@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -124,15 +124,19 @@ public partial class NopDatePickerTagHelper : TagHelper
         BeginYear ??= DateTime.UtcNow.AddYears(-100);
         EndYear ??= DateTime.UtcNow;
 
-        if (EndYear > BeginYear)
+        var beginYearVal = currentCalendar.GetYear(BeginYear.Value);
+        var endYearVal = currentCalendar.GetYear(EndYear.Value);
+
+        // Order years newest first (most common for date of birth — reduces scrolling)
+        if (endYearVal >= beginYearVal)
         {
-            for (var i = currentCalendar.GetYear(BeginYear.Value); i <= currentCalendar.GetYear(EndYear.Value); i++)
+            for (var i = endYearVal; i >= beginYearVal; i--)
                 years.AppendFormat("<option value='{0}'{1}>{0}</option>", i,
                     (SelectedDate.HasValue && currentCalendar.GetYear(SelectedDate.Value) == i) ? " selected=\"selected\"" : null);
         }
         else
         {
-            for (var i = currentCalendar.GetYear(BeginYear.Value); i >= currentCalendar.GetYear(EndYear.Value); i--)
+            for (var i = endYearVal; i <= beginYearVal; i++)
                 years.AppendFormat("<option value='{0}'{1}>{0}</option>", i,
                     (SelectedDate.HasValue && currentCalendar.GetYear(SelectedDate.Value) == i) ? " selected=\"selected\"" : null);
         }
