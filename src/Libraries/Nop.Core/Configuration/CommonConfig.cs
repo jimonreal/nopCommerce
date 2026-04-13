@@ -36,14 +36,6 @@ public partial class CommonConfig : IConfig
     public int? ScheduleTaskRunTimeout { get; protected set; } = null;
 
     /// <summary>
-    /// Gets or sets the base URL used by the task scheduler to self-post to /scheduletask/runtask.
-    /// When running behind a reverse proxy (e.g. in Docker), set this to the internal address
-    /// such as "http://localhost:8080" so the container can reach itself without going through
-    /// the public DNS/hairpin NAT. Defaults to the store URL if not set.
-    /// </summary>
-    public string ScheduleTaskBaseUrl { get; protected set; } = null;
-
-    /// <summary>
     /// Gets or sets a value of "Cache-Control" header value for static content (in seconds)
     /// </summary>
     public string StaticFilesCacheControl { get; protected set; } = "public,max-age=31536000";
